@@ -1,0 +1,22 @@
+CACHE MANIFEST
+
+CACHE:
+background.png
+style.css
+goldhen_2.4b18.11.bin
+index.html
+cache13.html
+13xx/core.js
+13xx/int64.js
+13xx/mem.js
+13xx/ps4_offsets.js
+13xx/rpc_worker.js
+13xx/jb.js
+13xx/goldhen.bin
+13xx/payload2.bin
+13xx/patches/1302.bin
+13xx/patches/1350.bin
+13xx/patches/1352.bin
+
+NETWORK:
+*
