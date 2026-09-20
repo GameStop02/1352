@@ -9,16 +9,6 @@ const lines = [];
 let passCount = 0,
   failCount = 0;
 const params = new URLSearchParams(location.search);
-// GameStop02 UI bridge
-(function(){
-  if (!document.getElementById("out")) { var o=document.createElement("pre"); o.id="out"; o.style.display="none"; document.body.appendChild(o); }
-  if (!document.getElementById("state")) { var st=document.createElement("div"); st.id="state"; st.style.display="none"; document.body.appendChild(st); }
-})();
-function gs02Status(t, c) {
-  var m=document.getElementById("msgs");
-  if (m) { m.textContent=t; if(c==="bad") m.style.color="red"; else if(c==="warn") m.style.color="yellow"; }
-}
-
 const STOP_BEFORE_DOUBLE = params.get("stop") === "beforedouble";
 
 function post(tag, detail) {
@@ -60,9 +50,7 @@ function terse(s) {
 const SHOW_LOG = params.get("log") === "1";
 if (SHOW_LOG && document.body) document.body.className = "log";
 function finishUI(ok) {
-  if (!document.body) return;
-  gs02Status(ok ? "GoldHEN / Jailbreak loaded ✔" : "Jailbreak failed — restart PS4", ok ? "ok" : "bad");
-  if (SHOW_LOG) return;
+  if (SHOW_LOG || !document.body) return;
   document.body.className = ok ? "done" : "fail";
 }
 function mark(tag, detail) {
@@ -97,7 +85,6 @@ function trace(tag, detail) {
   else post(tag, detail);
 }
 function state(t, c) {
-  gs02Status(t, c);
   if (!SHOW_LOG || !stateEl) return;
   stateEl.textContent = t;
   stateEl.className = c || "";
