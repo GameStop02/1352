@@ -51,8 +51,8 @@ const SHOW_LOG = params.get("log") === "1";
 if (SHOW_LOG && document.body) document.body.className = "log";
 function finishUI(ok) {
   if (!SHOW_LOG || !document.body) {
-    if (ok) updateProgress(100, "GameStop02 Jailbreak Complete ✔");
-    else updateProgress(0, "Jailbreak failed — reboot and try again");
+    if (ok) updateProgress(100, "اكتمل جيلبريك GameStop02 ✔");
+    else updateProgress(0, "فشل الجيلبريك — أعد تشغيل الجهاز وحاول مرة أخرى");
   }
   if (!document.body) return;
   document.body.className = ok ? "done" : "fail";
@@ -75,35 +75,35 @@ function updateProgress(percent, label) {
 
 function progressForTag(tag) {
   const stages = {
-    "FW": [5, "Detecting firmware..."],
-    "FW-STATUS": [8, "Firmware offsets verified ✔"],
-    "KPATCH-BLOB": [10, "Preparing kernel patch..."],
-    "PAYLOAD-BLOB": [12, "Preparing GoldHEN payload..."],
-    "PR-CFG": [14, "Configuring exploit..."],
-    "PRIMITIVE-OK": [25, "WebKit primitive ready ✔"],
-    "BASES": [28, "Resolving module bases..."],
-    "STUBS": [31, "Resolving system calls..."],
-    "PR-TWO-WORKERS-REACH-KERNEL": [35, "Kernel access established ✔"],
-    "PR-SATURATE": [40, "Preparing kernel stage..."],
-    "PR-LEAK": [45, "Kernel leak stage..."],
-    "PR-CURTHREADS": [50, "Preparing jailbreak..."],
-    "PR-FIRE": [55, "Executing jailbreak stage..."],
-    "PR-PASSA": [57, "Jailbreak pass A..."],
-    "PR-PASSB": [60, "Jailbreak pass B..."],
-    "PR-UCRED": [63, "Preparing system credentials..."],
-    "JB-ROOT": [66, "Jailbreak privileges established ✔"],
-    "EG-GATE": [68, "Jailbreak verified ✔"],
-    "KPATCH-PRE": [70, "Preparing kernel patch..."],
-    "KPATCH-MAP": [74, "Mapping kernel patch..."],
-    "KPATCH-COPY": [77, "Copying kernel patch..."],
-    "KEXEC": [82, "Applying kernel patch..."],
-    "KRW-VERDICT": [84, "Kernel read/write verified ✔"],
-    "PAYLOAD-MAP": [88, "Loading GoldHEN..."],
-    "PAYLOAD-COPY": [94, "Copying GoldHEN..."],
-    "PTHREAD-RESOLVE": [97, "Starting GoldHEN..."],
-    "PAYLOAD-RUN": [99, "GoldHEN loaded successfully ✔"],
-    "EG-VERDICT": [100, "GameStop02 Jailbreak Complete ✔"],
-    "THREW": [0, "Jailbreak failed"],
+    "FW": [5, "جارٍ اكتشاف إصدار النظام..."],
+    "FW-STATUS": [8, "تم التحقق من إزاحات النظام ✔"],
+    "KPATCH-BLOB": [10, "جارٍ تجهيز تصحيح النواة..."],
+    "PAYLOAD-BLOB": [12, "جارٍ تجهيز Payload الخاص بـ GoldHEN..."],
+    "PR-CFG": [14, "جارٍ إعداد الاستغلال..."],
+    "PRIMITIVE-OK": [25, "استغلال WebKit جاهز ✔"],
+    "BASES": [28, "جارٍ تحديد عناوين الوحدات..."],
+    "STUBS": [31, "جارٍ تحديد استدعاءات النظام..."],
+    "PR-TWO-WORKERS-REACH-KERNEL": [35, "تم الحصول على وصول إلى النواة ✔"],
+    "PR-SATURATE": [40, "جارٍ تجهيز مرحلة النواة..."],
+    "PR-LEAK": [45, "جارٍ تنفيذ مرحلة تسريب النواة..."],
+    "PR-CURTHREADS": [50, "جارٍ تجهيز الجيلبريك..."],
+    "PR-FIRE": [55, "جارٍ تنفيذ مرحلة الجيلبريك..."],
+    "PR-PASSA": [57, "مرحلة الجيلبريك A..."],
+    "PR-PASSB": [60, "مرحلة الجيلبريك B..."],
+    "PR-UCRED": [63, "جارٍ تجهيز صلاحيات النظام..."],
+    "JB-ROOT": [66, "تم الحصول على صلاحيات الجيلبريك ✔"],
+    "EG-GATE": [68, "تم التحقق من الجيلبريك ✔"],
+    "KPATCH-PRE": [70, "جارٍ تجهيز تصحيح النواة..."],
+    "KPATCH-MAP": [74, "جارٍ تحميل تصحيح النواة إلى الذاكرة..."],
+    "KPATCH-COPY": [77, "جارٍ نسخ تصحيح النواة..."],
+    "KEXEC": [82, "جارٍ تطبيق تصحيح النواة..."],
+    "KRW-VERDICT": [84, "تم التحقق من القراءة والكتابة في النواة ✔"],
+    "PAYLOAD-MAP": [88, "جارٍ تحميل GoldHEN..."],
+    "PAYLOAD-COPY": [94, "جارٍ نسخ GoldHEN..."],
+    "PTHREAD-RESOLVE": [97, "جارٍ تشغيل GoldHEN..."],
+    "PAYLOAD-RUN": [99, "تم تحميل GoldHEN بنجاح ✔"],
+    "EG-VERDICT": [100, "اكتمل جيلبريك GameStop02 ✔"],
+    "THREW": [0, "فشل الجيلبريك"],
   };
   const s = stages[tag];
   if (s) updateProgress(s[0], s[1]);
@@ -204,7 +204,7 @@ let allDone = false,
     const { key, off } = offsetsFor(navigator.userAgent);
     mark("FW", key || "(not a PS4 UA)");
     if (!off) {
-      state("no offsets for this firmware", "bad");
+      state("لا توجد إزاحات لهذا الإصدار من النظام", "bad");
       return;
     }
     const fwKey = key || "unknown";
@@ -349,7 +349,7 @@ let allDone = false,
         "read-phase retry " + retryCount() + "/" + RETRY_MAX,
       );
 
-    state("running the primitive...", "warn");
+    state("جارٍ تشغيل الاستغلال...", "warn");
     await new Promise((r) => setTimeout(r, 0));
 
     const PRIMITIVE_LOUD = /FAIL|ERROR|THREW|RETRY|ABORT|PASS/i;
