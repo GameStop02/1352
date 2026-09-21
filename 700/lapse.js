@@ -1700,7 +1700,7 @@ export async function kexploit() {
   }
 
   if (localStorage.ExploitLoaded === "yes" && sessionStorage.ExploitLoaded != "yes") {
-    msgs.innerHTML = "GoldHEN is Already Loaded ...";
+    msgs.innerHTML = "**GoldHEN مثبت بالفعل ✔️** ...";
     return new Promise(() => {});
   }
 
@@ -1865,8 +1865,8 @@ function runPayload(path) {
 
 kexploit().then(() => {
 	setTimeout(() => {
-		runPayload("./goldhen_2.4b18.10.bin");
-		msgs.innerHTML = "GoldHEN v2.4b18.10...تم تحميل";
+		runPayload("./GoldHEN_v2.4b18.12.bin");
+		msgs.innerHTML = "GoldHEN v2.4b18.12...تم تحميل";
 	}, 500);
 }).catch(() => {
     msgs.innerHTML = "...فشل التحميل! أعد تشغيل جهازك";

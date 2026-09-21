@@ -1830,8 +1830,8 @@ function runPayload(PLfile) {
 
 kexploit().then(() => {
 	setTimeout(() => {
-		runPayload("./goldhen_2.4b18.10.bin");
-		msgs.innerHTML = "GoldHEN v2.4b18.10...تم تحميل";
+		runPayload("./GoldHEN_v2.4b18.12.bin");
+		msgs.innerHTML = "GoldHEN v2.4b18.12...تم تحميل";
 	}, 500);
 }).catch(() => {
     msgs.innerHTML = "...فشل التحميل! أعد تشغيل جهازك";
