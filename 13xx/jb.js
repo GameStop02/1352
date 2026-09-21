@@ -50,10 +50,67 @@ function terse(s) {
 const SHOW_LOG = params.get("log") === "1";
 if (SHOW_LOG && document.body) document.body.className = "log";
 function finishUI(ok) {
-  if (SHOW_LOG || !document.body) return;
+  if (!SHOW_LOG || !document.body) {
+    if (ok) updateProgress(100, "GameStop02 Jailbreak Complete ✔");
+    else updateProgress(0, "Jailbreak failed — reboot and try again");
+  }
+  if (!document.body) return;
   document.body.className = ok ? "done" : "fail";
 }
+
+let progressValue = 0;
+function updateProgress(percent, label) {
+  try {
+    const bar = document.getElementById("progress-bar");
+    const pct = document.getElementById("progress-percent");
+    const lab = document.getElementById("progress-label");
+    const n = Math.max(0, Math.min(100, Number(percent) || 0));
+    // Never let a repeated earlier exploit event move the UI backwards.
+    progressValue = Math.max(progressValue, n);
+    if (bar) bar.style.width = progressValue + "%";
+    if (pct) pct.textContent = Math.round(progressValue) + "%";
+    if (lab && label) lab.textContent = label;
+  } catch (e) {}
+}
+
+function progressForTag(tag) {
+  const stages = {
+    "FW": [5, "Detecting firmware..."],
+    "FW-STATUS": [8, "Firmware offsets verified ✔"],
+    "KPATCH-BLOB": [10, "Preparing kernel patch..."],
+    "PAYLOAD-BLOB": [12, "Preparing GoldHEN payload..."],
+    "PR-CFG": [14, "Configuring exploit..."],
+    "PRIMITIVE-OK": [25, "WebKit primitive ready ✔"],
+    "BASES": [28, "Resolving module bases..."],
+    "STUBS": [31, "Resolving system calls..."],
+    "PR-TWO-WORKERS-REACH-KERNEL": [35, "Kernel access established ✔"],
+    "PR-SATURATE": [40, "Preparing kernel stage..."],
+    "PR-LEAK": [45, "Kernel leak stage..."],
+    "PR-CURTHREADS": [50, "Preparing jailbreak..."],
+    "PR-FIRE": [55, "Executing jailbreak stage..."],
+    "PR-PASSA": [57, "Jailbreak pass A..."],
+    "PR-PASSB": [60, "Jailbreak pass B..."],
+    "PR-UCRED": [63, "Preparing system credentials..."],
+    "JB-ROOT": [66, "Jailbreak privileges established ✔"],
+    "EG-GATE": [68, "Jailbreak verified ✔"],
+    "KPATCH-PRE": [70, "Preparing kernel patch..."],
+    "KPATCH-MAP": [74, "Mapping kernel patch..."],
+    "KPATCH-COPY": [77, "Copying kernel patch..."],
+    "KEXEC": [82, "Applying kernel patch..."],
+    "KRW-VERDICT": [84, "Kernel read/write verified ✔"],
+    "PAYLOAD-MAP": [88, "Loading GoldHEN..."],
+    "PAYLOAD-COPY": [94, "Copying GoldHEN..."],
+    "PTHREAD-RESOLVE": [97, "Starting GoldHEN..."],
+    "PAYLOAD-RUN": [99, "GoldHEN loaded successfully ✔"],
+    "EG-VERDICT": [100, "GameStop02 Jailbreak Complete ✔"],
+    "THREW": [0, "Jailbreak failed"],
+  };
+  const s = stages[tag];
+  if (s) updateProgress(s[0], s[1]);
+}
+
 function mark(tag, detail) {
+  progressForTag(tag);
   const raw = detail;
   detail = terse(detail);
   lines.push(tag + (detail == null || detail === "" ? "" : "  " + detail));
