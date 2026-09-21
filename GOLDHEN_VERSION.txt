@@ -1,4 +1,0 @@
-GameStop02 WebKit
-GoldHEN: 2.4b18.11
-All supported firmware paths use the uploaded GoldHEN 2.4b18.11 binary.
-payload2.bin preserved where supplied by the 13.xx exploit.
